@@ -8,6 +8,7 @@ build/bytecode/Conec*
 build/abi/Conec*
 build/contracts/Conec*
 contracts/Conec*.sol
+contracts/utils/*
 *.secret
 *.private
 accounts.py
