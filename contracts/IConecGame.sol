@@ -20,8 +20,8 @@ abstract contract IConecGame {
 	address public player2;
 	bool	public move;
 
-	function makeMove(uint8 column) public returns (bool);
-	function getBoard() public returns (uint256);
+	function makeMove(uint8 column) virtual public returns (bool);
+	function getBoard() virtual public returns (uint256);
 	
 	event gameStarted(address game_address, address player1, address player2);
 	event moveLogged(address player, uint8 move_number, uint8 move);
