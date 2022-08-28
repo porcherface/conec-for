@@ -6,8 +6,8 @@ The Game Contract will expose the following variables and functions
 - player2 (address): address of player2
 - move    (bool)   : the player who must make the next move, false for player1, true for player2
 
-- makeMove(uint8 column) returns (bool)
-- getBoard() returns (uint256)
+- makeMove(uint8 column) returns (bool) returns 0 if the move is registered, 1 otherwise
+- getBoard() returns (uint256) returns the board as a single uint256 number, details on how to read the board follows
 
 The game contract will also provide a game history in the event log using the following events: 
 - gameStarted(address game_address, address player1, address player2)
