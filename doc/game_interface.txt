@@ -4,10 +4,13 @@ The Game Contract will expose the following variables and functions
 
 - player1 (address): address of player 1 
 - player2 (address): address of player 2 - the two players will be always called player 0 and 1 from now on
+- winner  (address): address of winner, if game is in progress, address is set to 0x0
 - move    (bool)   : the player who must make the next move, false for player0, true for player1
 
-- makeMove(uint8 column) returns (bool) returns 0 if the move is registered, 1 otherwise
-- getBoard() returns (uint256) returns the board as a single uint256 number, details on how to read the board follows
+- makeMove(uint8 column) [onlyMover] returns (bool) returns 0 if the move is registered, 1 otherwise
+- getBoard()             [onlyPlayer]returns (uint256) returns the board as a single uint256 number
+
+details on how to read the board from getBoard() will follow in this document
 
 The game contract will also provide a game history in the event log using the following events: 
 - gameStarted(address game_address, address player0, address player1)

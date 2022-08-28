@@ -19,13 +19,39 @@ abstract contract IConecGame {
 	/* public variables */
 	address public player0;
 	address public player1;
+	address public winner;
 	bool	public move;
+	
+
+	modifier isPlayer() { 
+		require (msg.sender  == player1 || msg.sender == player0, "you are not a player"); 
+		_;
+ 	}
+
+	modifier isMover() { 
+ 		if (move) {
+			require (msg.sender  == player1, "not your time to move"); 
+			_; 
+		}
+		else {
+			require (msg.sender  == player0, "not your time to move"); 
+			_;	
+		}
+ 	}
+
+ 	bool 	private _locked;
+	modifier noReentrancy() {
+		require(!_locked, "No reentrancy");
+		_locked = true;
+		_;
+		_locked = false;
+	}
 
 	function makeMove(uint8 column) virtual public returns (bool);
-	function getBoard() virtual public returns (uint256);
+	function getBoard() virtual public view returns (uint256);
 	
 	event gameStarted(address game_address, address player0, address player1);
-	event moveLogged(address player, uint8 move_number, uint8 move_number);
+	event moveLogged(address player, uint8 column, uint8 move_number);
 	event gameOver(address game_address, address winner, uint256 prize);
 
 } 
