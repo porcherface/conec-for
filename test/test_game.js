@@ -130,9 +130,44 @@ contract("ConecGame", 	function ( accounts ) {
 			return;
 		}
 		);
+
+		it("should block a full column move", async function () {
+			let res = await game.makeMove(0, {from:accounts[1]}); //3
+			res     = await game.makeMove(0, {from:accounts[0]}); //4
+			res     = await game.makeMove(0, {from:accounts[1]}); //5
+			res     = await game.makeMove(0, {from:accounts[0]}); //6
+			res     = await game.makeMove(0, {from:accounts[1]}); //7
+			res     = await game.makeMove(0, {from:accounts[0]}); //8
+			res     = await game.makeMove(0, {from:accounts[1]}); //9
+			res     = await game.makeMove(0, {from:accounts[0]}); //10
+
+			await truffleAssert.reverts(game.makeMove(0, {from:accounts[1]}),"column is full");
+				
+
+		}
+		);
   	}
 	);
 	
 	
-	
-});
+  	describe('End conditions', function () {
+		it("should win horizontally", async function () {	
+    		h_win = await ConecGame.deployed();
+			await h_win.makeMove(0, {from:accounts[0]});
+			await h_win.makeMove(0, {from:accounts[1]});
+			await h_win.makeMove(1, {from:accounts[0]});
+			await h_win.makeMove(1, {from:accounts[1]});
+			await h_win.makeMove(2, {from:accounts[0]});
+			await h_win.makeMove(2, {from:accounts[1]});
+			await h_win.makeMove(3, {from:accounts[0]});
+			await h_win.makeMove(3, {from:accounts[1]});
+			return;
+		}
+		);	
+
+	}
+	);
+
+
+}
+);
