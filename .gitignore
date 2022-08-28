@@ -3,6 +3,31 @@
 # porcherface
 
 
+# MANUALLY LOCKED FILES:
+build/bytecode/Conec*
+build/abi/Conec*
+build/contracts/Conec*
+contracts/Conec*.sol
+*.secret
+*.private
+accounts.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### VisualStudioCode template
 .vscode/*
 !.vscode/settings.json
@@ -10,17 +35,6 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 ### Eclipse template
-
-# MANUALLY LOCKED FILES:
-build/bytecode
-build/abi
-build/contracts
-contracts/factory.sol
-contracts/butterfly.sol
-interact/private
-*.secret
-*.private
-accounts.py
 
 .metadata
 tmp/
