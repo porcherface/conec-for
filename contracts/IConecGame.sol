@@ -47,8 +47,8 @@ abstract contract IConecGame {
 		_locked = false;
 	}
 
-	function makeMove(uint8 column) virtual public returns (bool);
-	function getBoard() virtual public view returns (uint256);
+	function makeMove(uint8 column) virtual public returns (bool); //isMover
+	function getBoard() virtual public view returns (uint256);     //isPlayer
 	
 	event gameStarted(address game_address, address player0, address player1);
 	event moveLogged(address player, uint8 column, uint8 move_number);
