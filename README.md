@@ -3,9 +3,14 @@
 connect4 blockchain implementation. bet ether against other opponents!
 
 # temporary:
-
-this contract is not yet deployed and is under development. interfaces have been distributed in the contract folder.
+interfaces have been distributed in the contract folder.
 you can use these interfaces to create a gaming gui for yourself, or use my python script to have an ugly but working gaming client.
+
+# timeline
+
+aug 28 2022, the project starts here
+![first-chat](/doc/idea_chat.png)
+
 
 # take a look at my other solidity projects:
 
