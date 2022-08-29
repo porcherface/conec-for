@@ -47,6 +47,8 @@ abstract contract IConecGame {
 		_locked = false;
 	}
 
+	receive() virtual external payable;
+	fallback() virtual external payable;
 	function makeMove(uint8 column) virtual public returns (bool); //isMover
 	function getBoard() virtual public view returns (uint256);     //isPlayer
 	

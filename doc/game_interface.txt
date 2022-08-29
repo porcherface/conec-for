@@ -7,10 +7,18 @@ The Game Contract will expose the following variables and functions
 - winner  (uint8)  : 0 if game in progress, 1 if player0 wins, 2 if player2 wins, 3 if draw
 - move    (bool)   : the player who must make the next move, false for player0, true for player1
 
+
 - makeMove(uint8 column) [onlyMover] returns (bool) returns 0 if the move is registered, 1 otherwise
 - getBoard()             [onlyPlayer]returns (uint256) returns the board as a single uint256 number
-- resign()               [onlyPlayer]returns (bool) resigns the game
-- claim()				 [onlyPlayer] after 24h you can claim a win	
+- resign()               [onlyPlayer]returns (bool) resigns the game (NOT IMPLEMENTED)
+- claim()				 [onlyPlayer] after 24h you can claim a win	(NOT IMPLEMENTED)
+
+game also has a receive() and a fallback() function.
+
+if you are not familiar with custom transactions and custom calls in eth you can simply send 0ETH with a custom data attached.
+the custom data must contain only one number (0-9) and will be interpreted as makeMove(number)
+
+
 
 details on how to read the board from getBoard() will follow in this document
 
