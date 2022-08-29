@@ -19,7 +19,7 @@ abstract contract IConecGame {
 	/* public variables */
 	address public player0;
 	address public player1;
-	address public winner;
+	uint8   public winner;
 	bool	public move;
 	
 
