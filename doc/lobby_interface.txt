@@ -1,1 +1,12 @@
 TBD
+
+The coordinator will expose the following functions:
+
+- createGame()
+- listGames()
+- joinGameById()
+- myGames()
+
+the coordinator will also expose the following variable
+- alTimesGamesLaunched
+
