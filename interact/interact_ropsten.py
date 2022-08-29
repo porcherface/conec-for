@@ -3,6 +3,7 @@ import web3
 import json
 from utils.abi import getAbi
 from utils.private import getPrivate
+from render.int2board import render
 import sys
 
 try:
@@ -38,7 +39,7 @@ transact_params = {
 }
 
 
-game_addr = None
+game_addr = "0xc027b2D79080B47055880A3Ca5A94960b74a5dFd"
 if __name__ == "__main__":
 	
 	print("Tring to connect to game @:"+game_addr)
@@ -49,7 +50,7 @@ if __name__ == "__main__":
 	while ans != "q" and ans != None:
 
 		if ans == "b":	
-			board = game.functions.getBoard().call()
+			board = game.functions.getBoard().call({'from': default_address})
 			print("BOARD:")
 			render(board)
 
