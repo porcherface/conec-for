@@ -4,11 +4,13 @@ The Game Contract will expose the following variables and functions
 
 - player1 (address): address of player 1 
 - player2 (address): address of player 2 - the two players will be always called player 0 and 1 from now on
-- winner  (address): address of winner, if game is in progress, address is set to 0x0
+- winner  (uint8)  : 0 if game in progress, 1 if player0 wins, 2 if player2 wins, 3 if draw
 - move    (bool)   : the player who must make the next move, false for player0, true for player1
 
 - makeMove(uint8 column) [onlyMover] returns (bool) returns 0 if the move is registered, 1 otherwise
 - getBoard()             [onlyPlayer]returns (uint256) returns the board as a single uint256 number
+- resign()               [onlyPlayer]returns (bool) resigns the game
+- claim()				 [onlyPlayer] after 24h you can claim a win	
 
 details on how to read the board from getBoard() will follow in this document
 
