@@ -1,6 +1,8 @@
 const ConecGame = artifacts.require("ConecGame");
 const truffleAssert = require('truffle-assertions');
 
+console.log("starting test battery...")
+
 contract("ConecGame", 	function ( accounts ) {
   	
 
@@ -40,7 +42,7 @@ contract("ConecGame", 	function ( accounts ) {
   		}
 		);
 
-  		it("should set winner as 0x0", async function ( ) {
+  		it("should set winner as 0 (playing)", async function ( ) {
     		
   			const winner = await game.winner();
   			assert.equal(winner, 0);
@@ -99,9 +101,14 @@ contract("ConecGame", 	function ( accounts ) {
   			return;  		
   		}
 		);  	
+		it("should update the board", async function ( ) {
+			const board = await game.getBoard();
+			assert.equal(board, 8+1+4**10);
+  		}
+		);  	
 	}
 	);
-
+  	
   	describe('Reverts', function () {
 
 		it("should assert false", async function () {	
@@ -151,23 +158,94 @@ contract("ConecGame", 	function ( accounts ) {
 	
 	
   	describe('End conditions', function () {
-		it("should win horizontally", async function () {	
-    		h_win = await ConecGame.deployed();
-			await h_win.makeMove(0, {from:accounts[0]});
-			await h_win.makeMove(0, {from:accounts[1]});
-			await h_win.makeMove(1, {from:accounts[0]});
-			await h_win.makeMove(1, {from:accounts[1]});
-			await h_win.makeMove(2, {from:accounts[0]});
-			await h_win.makeMove(2, {from:accounts[1]});
-			await h_win.makeMove(3, {from:accounts[0]});
-			await h_win.makeMove(3, {from:accounts[1]});
+		it("should win horizontally (P1)", async function () {	
+    		h0_win = await ConecGame.deployed();
+			await h0_win.makeMove(0, {from:accounts[0]});
+			await h0_win.makeMove(0, {from:accounts[1]});
+			await h0_win.makeMove(1, {from:accounts[0]});
+			await h0_win.makeMove(1, {from:accounts[1]});
+			await h0_win.makeMove(2, {from:accounts[0]});
+			await h0_win.makeMove(2, {from:accounts[1]});
+			await h0_win.makeMove(3, {from:accounts[0]});
+			const winner = await h_win.winner();
+			assert.equal(winner, 1);
 			return;
 		}
 		);	
 
+		it("should win horizontally (P2)", async function () {	
+    		h1_win = await ConecGame.deployed();
+			await h1_win.makeMove(0, {from:accounts[0]});
+			await h1_win.makeMove(1, {from:accounts[1]});
+			await h1_win.makeMove(0, {from:accounts[0]});
+			await h1_win.makeMove(2, {from:accounts[1]});
+			await h1_win.makeMove(1, {from:accounts[0]});
+			await h1_win.makeMove(3, {from:accounts[1]});
+			await h1_win.makeMove(2, {from:accounts[0]});
+			await h1_win.makeMove(4, {from:accounts[1]});
+			const winner = await h_win.winner();
+			assert.equal(winner, 2);
+			return;
+		}
+		);
+
+		it("should win vertically (P1)", async function () {	
+    		v0_win = await ConecGame.deployed();
+			await v0_win.makeMove(0, {from:accounts[0]});
+			await v0_win.makeMove(1, {from:accounts[1]});
+			await v0_win.makeMove(0, {from:accounts[0]});
+			await v0_win.makeMove(2, {from:accounts[1]});
+			await v0_win.makeMove(0, {from:accounts[0]});
+			await v0_win.makeMove(3, {from:accounts[1]});
+			await v0_win.makeMove(0, {from:accounts[0]});
+			const winner = await h_win.winner();
+			assert.equal(winner, 1);
+			return;
+		}
+		);
+	
+
+		it("should win diagonally (P1)", async function () {	
+    		d0_win = await ConecGame.deployed();
+			await d0_win.makeMove(0, {from:accounts[0]});
+			await d0_win.makeMove(1, {from:accounts[1]});
+			await d0_win.makeMove(1, {from:accounts[0]});
+			await d0_win.makeMove(2, {from:accounts[1]});
+			await d0_win.makeMove(0, {from:accounts[0]});
+			await d0_win.makeMove(2, {from:accounts[1]});
+			await d0_win.makeMove(2, {from:accounts[0]});
+			await d0_win.makeMove(3, {from:accounts[1]});
+			await d0_win.makeMove(3, {from:accounts[0]});
+			await d0_win.makeMove(3, {from:accounts[1]});
+			await d0_win.makeMove(3, {from:accounts[0]});
+			const winner = await h_win.winner();
+			assert.equal(winner, 1);
+			return;
+		}
+		);
+
+		it("should draw (P1)", async function () {	
+    		draw = await ConecGame.deployed();
+			await draw.makeMove(0, {from:accounts[0]});
+			await draw.makeMove(1, {from:accounts[1]});
+			await draw.makeMove(1, {from:accounts[0]});
+			await draw.makeMove(2, {from:accounts[1]});
+			await draw.makeMove(0, {from:accounts[0]});
+			await draw.makeMove(2, {from:accounts[1]});
+			await draw.makeMove(2, {from:accounts[0]});
+			await draw.makeMove(3, {from:accounts[1]});
+			await draw.makeMove(3, {from:accounts[0]});
+			await draw.makeMove(3, {from:accounts[1]});
+			await draw.makeMove(3, {from:accounts[0]});
+			const winner = await h_win.winner();
+			assert.equal(winner, 3);
+			return;
+		}
+		);
+
+
 	}
 	);
-
 
 }
 );
